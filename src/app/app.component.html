@@ -1,66 +1,84 @@
-
-<div class="ui-g" style="height:300px;">
-  <div class="ui-g-4">
-    <p-card  header="Choose Server">
-      <p-header>
-        <!-- Choose Server -->
-      </p-header>
-
-      <div class="ui-g">
-        <div class="ui-g-12">
-          <p-radioButton  class="sample" 
-                          name="groupname" 
-                          value="local" 
-                          [(ngModel)]="serverMode" 
-                          (click)="serverValue = '192.168.254.100'" 
-                          label="Local"></p-radioButton>
-          <br>
-          <p-radioButton  class="sample" 
-                          name="groupname" 
-                          value="remote" 
-                          [(ngModel)]="serverMode" 
-                          (click)="serverValue = 'https://tester-holdem-server.4b63.pro-ap-southeast-2.openshiftapps.com:8080'" 
-                          label="Remote"></p-radioButton>
-        </div>
-      </div>
+<div class="p-grid">
+  <!-- choose server -->
+  <div class="p-col-3">
+    <p-fieldset legend="Choose Server" [toggleable]="true">
+      <p-radioButton  class="sample" 
+                      name="groupname" 
+                      value="local" 
+                      [(ngModel)]="serverMode" 
+                      (click)="serverValue = '192.168.254.100'" 
+                      label="Local"></p-radioButton>
+      <br>
+      <p-radioButton  class="sample" 
+                      name="groupname" 
+                      value="remote" 
+                      [(ngModel)]="serverMode" 
+                      (click)="serverValue = 'https://tester-holdem-server.4b63.pro-ap-southeast-2.openshiftapps.com:8080'" 
+                      label="Remote"></p-radioButton>
+    
       <div *ngIf="serverMode == 'local'" style="margin:10px;">
-          <div class="ui-inputgroup">
-              <span class="ui-inputgroup-addon" >192.168.254.</span>
-              <p-dropdown [options]="LocalIPOptions" [(ngModel)]="serverValue"></p-dropdown>     
-          </div>
-        </div>
-        <div *ngIf="serverMode == 'remote'" style="margin:10px;">
-          <input  type="text" 
-                  style="width:100%" 
-                  pInputText 
-                  [(ngModel)]="serverValue" 
-                  placeholder="Website">
-        </div>
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon" >192.168.254.</span>
+        <p-dropdown [options]="LocalIPOptions" [(ngModel)]="serverValue"></p-dropdown>     
+      </div>
+      </div>
+      <div *ngIf="serverMode == 'remote'" style="margin:10px;">
+        <input  type="text" 
+                style="width:100%" 
+                pInputText 
+                [(ngModel)]="serverValue" 
+                placeholder="Website">
+      </div>
+      <p-message severity="info" text="Server : {{serverValue}}"></p-message>
+    </p-fieldset>
+  </div>
 
-      <p-footer >
-        <p-message severity="info" text="Server : {{serverValue}}"></p-message> 
-      </p-footer>
+  <!-- routes on/off list -->
+  <div class="p-col-2">
+    <p-button icon="pi pi-replay" (click)="get()"></p-button>
+    
+    <p-card header="routes :">
+      <div *ngFor="let r of routesTree2;">
+        <p-checkbox name="groupname" [(ngModel)]="r.show" [label]="r.title" binary="true"></p-checkbox>
+      </div>
     </p-card>
   </div>
-  <div class="ui-g-4">
-    <button (click)="test()">xxx</button>
-    <div style="width: 500px; height: 500px;">
-      <p-chart type="pie" [data]="displayedRoutesCalled" ></p-chart>
+
+  <!-- routes tree list -->
+  <div class="p-col-2">
+    <div *ngFor="let r of routesTree2" >
+      <div *ngIf="r.show">
+        <h3 class="first">{{r.title}}
+          <p-button icon="pi pi-times" 
+                    styleClass="ui-button-secondary" 
+                    (click)="r.show = false" 
+                    style="margin-left: 10px;"></p-button>
+        </h3>
+        
+        <p-tree [value]="r.data" >
+
+        </p-tree> 
+      </div>
     </div>
   </div>
-  <div class="ui-g-4">
-
+  
+  <!-- chart -->
+  <div class="p-col-5">
+    <p-button (click)="translateToChart()" label="show/refresh pie chart" styleClass="ui-button-warning"></p-button>
+  
+    <div style="width: 500px; height: 300px;">
+      <p-chart type="pie" [data]="displayedRoutesCalled">
+      </p-chart>
+    </div>
+    <p-message severity="info" *ngIf="displayedRoutesCalled" text="hover to show request count"></p-message>
   </div>
 </div>
 
-<p-button icon="pi pi-replay" (click)="get()"></p-button>
-<div class="p-grid p-justify-start ">
 
-  <div class="p-col" *ngFor="let r of routesTree2">
-    <h3 class="first">{{r.title}}</h3>
-    <p-tree [value]="r.data" ></p-tree> 
-  </div>
-</div>
+
+
+
+
 
 
 <router-outlet></router-outlet>

@@ -27,6 +27,9 @@ export class AppComponent {
 
   routesTree:TreeNode[]
   routesTree2:any[]
+  selectedRoutes:any[]
+
+  sample = true
   constructor(private routecalled:RoutecalledService){
     this.get()
 
@@ -72,7 +75,7 @@ export class AppComponent {
     return hex;
   }
 
-  test(){
+  translateToChart(){
     this.get()
 
     if(this.routesCalled != undefined){
@@ -91,6 +94,11 @@ export class AppComponent {
               backgroundColor: this.routesBackgroundColor
           }]    
       };
+  }
+
+  test(){
+    console.log(this.routesTree2[0].show)
+    this.routesTree2[0].show = false
   }
 
 }

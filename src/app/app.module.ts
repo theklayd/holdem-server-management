@@ -18,6 +18,8 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ChartModule} from 'primeng/chart';
 import {TreeModule} from 'primeng/tree';
+import {CheckboxModule} from 'primeng/checkbox';
+import {FieldsetModule} from 'primeng/fieldset';
 @NgModule({
   declarations: [
     AppComponent
@@ -39,7 +41,9 @@ import {TreeModule} from 'primeng/tree';
     MessagesModule,
     MessageModule,
     ChartModule,
-    TreeModule
+    TreeModule,
+    CheckboxModule,
+    FieldsetModule
   ],
   providers: [],
   bootstrap: [AppComponent]
