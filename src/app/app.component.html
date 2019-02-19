@@ -46,19 +46,16 @@
 
   <!-- routes tree list -->
   <div class="p-col-2">
-    <div *ngFor="let r of routesTree2" >
-      <div *ngIf="r.show">
-        <h3 class="first">{{r.title}}
+    <div *ngFor="let r of routesTree2" style="margin: 10px;">
+      <p-card  *ngIf="r.show">
+        <h3 style="margin:0">{{r.title}}
           <p-button icon="pi pi-times" 
-                    styleClass="ui-button-secondary" 
-                    (click)="r.show = false" 
-                    style="margin-left: 10px;"></p-button>
+                    styleClass="ui-button-secondary"
+                    (click)="r.show = false"></p-button>
         </h3>
         
-        <p-tree [value]="r.data" >
-
-        </p-tree> 
-      </div>
+        <p-tree [value]="r.data" ></p-tree> 
+      </p-card>
     </div>
   </div>
   
