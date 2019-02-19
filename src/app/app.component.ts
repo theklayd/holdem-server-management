@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SelectItem} from 'primeng/api';
+import {SelectItem, TreeNode} from 'primeng/api';
 import { RoutecalledService } from '../app/services/routecalled/routecalled.service'
 
 interface routesCalledModel{
@@ -21,10 +21,12 @@ export class AppComponent {
   routesCalled:routesCalledModel[]
   displayedRoutesCalled:any
 
-  routesLabel:string[] = ['label','label2','label3']
+  routesLabel:string[] = []
   routesData:number[] = []
   routesBackgroundColor:string[] = []
 
+  routesTree:TreeNode[]
+  routesTree2:any[]
   constructor(private routecalled:RoutecalledService){
     this.get()
 
@@ -54,8 +56,9 @@ export class AppComponent {
   get(){
     this.routecalled.getRoutesCalled(this.serverValue)
     .subscribe(
-      (res:routesCalledModel[]) => {
+      (res:any[]) => {
         this.routesCalled = res
+        this.routesTree2 = res
         console.log(res)
       }
     )

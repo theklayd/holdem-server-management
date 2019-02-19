@@ -17,6 +17,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ChartModule} from 'primeng/chart';
+import {TreeModule} from 'primeng/tree';
 @NgModule({
   declarations: [
     AppComponent
@@ -37,7 +38,8 @@ import {ChartModule} from 'primeng/chart';
     InputTextModule,
     MessagesModule,
     MessageModule,
-    ChartModule
+    ChartModule,
+    TreeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

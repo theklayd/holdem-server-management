@@ -1,5 +1,5 @@
 
-<div class="ui-g">
+<div class="ui-g" style="height:300px;">
   <div class="ui-g-4">
     <p-card  header="Choose Server">
       <p-header>
@@ -44,14 +44,22 @@
   </div>
   <div class="ui-g-4">
     <button (click)="test()">xxx</button>
+    <div style="width: 500px; height: 500px;">
+      <p-chart type="pie" [data]="displayedRoutesCalled" ></p-chart>
+    </div>
   </div>
   <div class="ui-g-4">
 
   </div>
 </div>
 
-<div style="width: 500px; height: 500px;">
-  <p-chart type="pie" [data]="displayedRoutesCalled" ></p-chart>
+<p-button icon="pi pi-replay" (click)="get()"></p-button>
+<div class="p-grid p-justify-start ">
+
+  <div class="p-col" *ngFor="let r of routesTree2">
+    <h3 class="first">{{r.title}}</h3>
+    <p-tree [value]="r.data" ></p-tree> 
+  </div>
 </div>
 
 
